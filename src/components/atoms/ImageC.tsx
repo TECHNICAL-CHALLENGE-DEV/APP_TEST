@@ -16,7 +16,7 @@ const ImageC = ({ uri, width, height }: ImageCProps) => {
 
   return (
     <View>
-      <Image style={[{ width: width ?? '100%', height, borderRadius: 2 }]} source={isLoading ? require('../../assets/images/placeholder.png') : { uri }} onLoadEnd={loadEnd} defaultSource={require('../../assets/images/placeholder.png')} />
+      <Image style={[{ width: width ?? '100%', height, borderRadius: 2 }]} source={isLoading ? require('../../assets/images/placeholder.png') : { uri }} onLoadEnd={loadEnd} />
     </View>
   )
 }

@@ -11,18 +11,16 @@ import { useGeoLocation } from '../hooks/useGeolocation'
 const HomeScreen = () => {
 
   const { stores, fetchProducts, status } = useStores()
-  const { getUserLocation, hasPosition } = useGeoLocation()
+  const { getUserLocation } = useGeoLocation()
 
   const renderItem: ListRenderItem<IStore> = ({ item }) => {
     return <CardStore store={item} key={item.id} />
   }
 
   const getLocation = async () => {
-    if (hasPosition == false) {
-      const currentPosition = await getUserLocation()
-      if (currentPosition.error == false) {
-        await fetchProducts(currentPosition.latitude, currentPosition.longitude)
-      }
+    const currentPosition = await getUserLocation()
+    if (currentPosition.error == false) {
+      await fetchProducts(currentPosition.latitude, currentPosition.longitude)
     }
   }
 
@@ -36,7 +34,7 @@ const HomeScreen = () => {
             keyExtractor={(item) => item.id.toString()}
             data={stores}
             renderItem={renderItem}
-            contentContainerStyle={{ gap: 15, marginHorizontal: 23, marginVertical: 22 }} />
+            contentContainerStyle={{ gap: 15, padding: 23 }} />
         )
       case Status.LOADING:
         return <Loading />

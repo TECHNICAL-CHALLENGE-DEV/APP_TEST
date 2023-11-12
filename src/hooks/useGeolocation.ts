@@ -10,8 +10,6 @@ export interface IGeolocation {
 
 export const useGeoLocation = () => {
 
-  const [hasPosition, setHasPosition] = useState(false)
-
   const openSettings = () => {
     Linking.openSettings();
   }
@@ -44,7 +42,6 @@ export const useGeoLocation = () => {
     try {
       const granted = await requestPermission()
       if (granted === PermissionsAndroid.RESULTS.GRANTED) {
-        setHasPosition(true)
         const location = await getCurrentPosition();
         return { error: false, latitude: (location as GeoPosition)?.coords?.latitude, longitude: (location as GeoPosition)?.coords?.longitude }
       } else {
@@ -56,5 +53,5 @@ export const useGeoLocation = () => {
 
   }
 
-  return { hasPosition, getUserLocation }
+  return {  getUserLocation }
 }
